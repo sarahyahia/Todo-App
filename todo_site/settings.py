@@ -25,9 +25,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY',)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 AUTH_USER_MODEL = 'authentication.User'
+
+LOGIN_URL = '/auth/login'
 
 # Application definition
 
@@ -126,3 +128,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'todo_site/static')]
+
+
+# EMAIL CONFIG  
+EMAIL_FROM_USER = os.environ.get('EMAIL_USER',).replace('\n', '').replace('\r', '')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER',).replace('\n', '').replace('\r', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD',).replace('\n', '').replace('\r', '')
+EMAIL_PORT= 587
+EMAIL_USE_TLS = True

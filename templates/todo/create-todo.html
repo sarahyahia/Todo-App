@@ -8,6 +8,7 @@ Create Todo
 {% block content%}
 
     <h1>Create Todos</h1>
+    {% include "_partials/messages.html" %}
     <form class="ui form" method="POST" action={% url 'create_todo' %}>
         {% csrf_token %}
         {{form.as_p}}

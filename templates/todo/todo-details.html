@@ -7,7 +7,8 @@ Create Todo
 
 {% block content%}
 
-    <h1 class="ui header">Details</h1>
+    <h1 class="ui header">Task Details</h1>
+    {% include "_partials/messages.html" %}
     <div class="ui card">
         <div class="content">
             <div class="header">{{todo.title}}</div>
