@@ -1,0 +1,8 @@
+[run]
+omit=
+    */env/*
+    */tests/*
+    */staticfiles/*
+    */migrations/*
+    */__init__.py
+    */apps.py

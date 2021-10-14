@@ -43,8 +43,9 @@ def send_activation_email(user, request):
     html_content = htmly.render(context)
     email = EmailMultiAlternatives(subject, html_content, from_email, [to])
     email.attach_alternative(html_content, "text/html")
-    # email.content_subtype = "html"
-    EmailThread(email).start()
+
+    if not settings.TESTING:
+        EmailThread(email).start()
 
 
 @auth_user_should_not_access
@@ -76,13 +77,13 @@ def register(request):
             messages.add_message(request, messages.ERROR,'Username is taken, choose another one')
             context['has_error'] = True
 
-            return render(request, 'authentication/register.html', context, status=409)
+            return render(request, 'authentication/register.html', context, status=409) # to make sure the status code returned in tests/test_views.py is right
 
-        # if User.objects.filter(email=email).exists():
-        #     messages.add_message(request, messages.ERROR,'Email is taken, choose another one')
-        #     context['has_error'] = True
+        if User.objects.filter(email=email).exists():
+            messages.add_message(request, messages.ERROR,'Email is taken, choose another one')
+            context['has_error'] = True
 
-        #     return render(request, 'authentication/register.html', context, status=409)
+            return render(request, 'authentication/register.html', context, status=409) # to make sure the status code returned in tests/test_views.py is right
 
         if context['has_error']:
             return render(request, 'authentication/register.html', context)
