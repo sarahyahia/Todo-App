@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import os ,sys
+import os ,sys, platform
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,6 +79,13 @@ WSGI_APPLICATION = 'todo_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+dbHost = ""
+    if platform.system() == "Linux": # Linux means running inside Ubuntu in docker in my case.
+        dbHost = "db" # or use .env file
+    else:
+        dbHost = "localhost"
+
 
 DATABASES = {
     'default': {
