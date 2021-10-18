@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'todo_site.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 dbHost = ""
-    if platform.system() == "Linux": # Linux means running inside Ubuntu in docker in my case.
-        dbHost = "db" # or use .env file
-    else:
-        dbHost = "localhost"
+if platform.system() == "Linux": # Linux means running inside Ubuntu in docker in my case.
+    dbHost = "db" # or use .env file
+else:
+    dbHost = "localhost"
 
 
 DATABASES = {
